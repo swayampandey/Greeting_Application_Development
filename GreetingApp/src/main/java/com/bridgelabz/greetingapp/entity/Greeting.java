@@ -1,12 +1,22 @@
 package com.bridgelabz.greetingapp.entity;
 
-public class Greeting {
-    private long id;
-    private String name;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
-    public Greeting(long id, String name) {
+@Entity
+public class Greeting {
+    @Id
+    @Column(name="id", nullable=false)
+    private long id;
+    @Column(name="message", nullable=false)
+    private String message;
+
+    public Greeting(){}
+
+    public Greeting(long id, String message) {
         this.id = id;
-        this.name = name;
+        this.message = message;
     }
 
     public long getId() {
@@ -17,11 +27,11 @@ public class Greeting {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getMessage() {
+        return message;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setMessage(String message) {
+        this.message = message;
     }
 }
