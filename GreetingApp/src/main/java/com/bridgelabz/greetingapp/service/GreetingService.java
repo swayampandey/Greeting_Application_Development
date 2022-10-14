@@ -44,13 +44,23 @@ public class GreetingService implements IGreetingService {
     public List<Greeting> getAllGreetingMsg() {
         return greetingRepository.findAll();
     }
+
     @Override
     public Greeting updateGreetingMsg(long id, User user) {
         Optional<Greeting> greeting = greetingRepository.findById(id);
-        if (greeting.isPresent()){
+        if (greeting.isPresent()) {
             String name = user.toString().isEmpty() ? "Hello world " : user.toString();
-            return greetingRepository.save(new Greeting(greeting.get().getId(),String.format(template,name)));
+            return greetingRepository.save(new Greeting(greeting.get().getId(), String.format(template, name)));
         }
         return null;
+    }
+
+    @Override
+    public Greeting deleteGreetingMsg(long id) {
+        Optional<Greeting> greeting = greetingRepository.findById(id);
+        if (greeting.isPresent()) {
+            greetingRepository.deleteById(id);
+        }
+        return greeting.get();
     }
 }
